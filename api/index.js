@@ -1,3 +1,4 @@
+
 const express = require('express');
 const { MongoClient, ObjectId } = require('mongodb');
 const cors = require('cors');
@@ -21,3 +22,35 @@ app.listen(5038, () => {
         }
     });
 });
+
+app.get('/api/DishDash/GetQuestions', (request, response) => {
+    database.collection("questionTreeCollection").find({}).toArray((error, result) => {
+        if (error) {
+            console.error("Error fetching data:", error);
+            response.status(500).send("Internal Server Error");
+        } else {
+            response.send(result);
+        }
+    });
+});
+
+app.post('/api/saveResponseToMongoDB', (request, response) => {
+    const { userId, questionText, responseText, questionId, createdAt } = request.body;
+
+    database.collection("responsesCollection").insertOne({
+        userId,
+        questionText,
+        responseText,
+        questionId,
+        createdAt
+    }, (error, result) => {
+        if (error) {
+            console.error("Error adding response:", error);
+            response.status(500).send("Internal Server Error");
+        } else {
+            response.json('Response added successfully');
+        }
+    });
+});
+
+module.exports = app;

@@ -1,0 +1,42 @@
+/* App.css */
+
+.App {
+  text-align: center;
+  padding: 20px;
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 100px; /* Adjust the width to your desired size */
+  margin-right: 10px; /* Add some margin to separate the logo from the title */
+}
+
+h1.title {
+  margin: 0;
+}
+
+h2, h3 {
+  margin: 20px 0;
+}
+
+input {
+  padding: 10px;
+  margin: 10px 0;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
