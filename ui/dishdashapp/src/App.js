@@ -10,6 +10,9 @@ class App extends Component {
             currentQuestionIndex: 0,
             answers: [],
             completed: false,
+            showResult: false,
+            countdown: 3,
+            dishName: 'Primavera Pesto Pasta Salad',
         };
     }
 
@@ -47,10 +50,22 @@ class App extends Component {
             }));
             this.saveDataToMongoDB(currentQuestionIndex); // Save data to MongoDB on next question
         } else {
-            // If all questions are answered, set completed to true
-            this.setState({ completed: true });
+            this.setState({ showResult: true });
             this.saveDataToMongoDB(currentQuestionIndex); // Save the last answer to MongoDB
+            this.startCountdown();
         }
+    };
+
+    startCountdown = () => {
+        const countdownInterval = setInterval(() => {
+            this.setState(prevState => {
+                if (prevState.countdown === 1) {
+                    clearInterval(countdownInterval);
+                    return { countdown: 0 };
+                }
+                return { countdown: prevState.countdown - 1 };
+            });
+        }, 1000);
     };
 
     saveDataToMongoDB = (currentQuestionIndex) => {
@@ -80,17 +95,18 @@ class App extends Component {
     };
 
     handleRestart = () => {
-        // Reset the state to restart the questionnaire
         this.setState({
             name: '',
             answers: [],
             currentQuestionIndex: 0,
             completed: false,
+            showResult: false,
+            countdown: 3,
         });
     };
 
     render() {
-        const { name, questions, currentQuestionIndex, answers, completed } = this.state;
+        const { name, questions, currentQuestionIndex, answers, completed, showResult, countdown, dishName } = this.state;
         const currentQuestion = questions[currentQuestionIndex];
 
         return (
@@ -104,6 +120,20 @@ class App extends Component {
                         <h3>Thank you for answering the questions, {name}!</h3>
                         <button onClick={this.handleRestart}>Restart</button>
                     </div>
+                ) : showResult ? (
+                    countdown > 0 ? (
+                        <div>
+                            <h3>And the dish chosen for you is:</h3>
+                            <h1>{countdown}</h1>
+                        </div>
+                    ) : (
+                        <div>
+                            <h3>And the dish chosen for you is:</h3>
+                            <h2>{dishName}</h2>
+                            <img src="/images/primaveraPestoPastaSalad.jpg" alt="Primavera Pesto Pasta Salad" className="dish-image" />
+                            <button onClick={() => this.setState({ completed: true })}>Finish</button>
+                        </div>
+                    )
                 ) : currentQuestionIndex === 0 ? (
                     <div>
                         <h2>Welcome to DishDash!</h2>

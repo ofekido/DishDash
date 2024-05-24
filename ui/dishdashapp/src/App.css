@@ -1,22 +1,6 @@
-/* App.css */
-
 .App {
   text-align: center;
   padding: 20px;
-}
-
-.top-bar {
-  display: flex;
-  align-items: center;
-}
-
-.logo {
-  width: 100px; /* Adjust the width to your desired size */
-  margin-right: 10px; /* Add some margin to separate the logo from the title */
-}
-
-h1.title {
-  margin: 0;
 }
 
 h2, h3 {
@@ -39,4 +23,27 @@ button {
 
 button:hover {
   background-color: #45a049;
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #f8f8f8;
+}
+
+.logo {
+  height: 50px;
+  margin-right: 10px;
+}
+
+.title {
+  font-size: 24px;
+  margin: 0;
+}
+
+.dish-image {
+  width: 300px;
+  height: auto;
+  margin-top: 20px;
 }
