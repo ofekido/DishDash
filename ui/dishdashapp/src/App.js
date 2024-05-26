@@ -105,6 +105,10 @@ class App extends Component {
         });
     };
 
+    handleOrderClick = () => {
+        alert('Order functionality coming soon!');
+    };
+
     render() {
         const { name, questions, currentQuestionIndex, answers, completed, showResult, countdown, dishName } = this.state;
         const currentQuestion = questions[currentQuestionIndex];
@@ -127,10 +131,16 @@ class App extends Component {
                             <h1>{countdown}</h1>
                         </div>
                     ) : (
-                        <div>
-                            <h3>And the dish chosen for you is:</h3>
-                            <h2>{dishName}</h2>
-                            <img src="/images/primaveraPestoPastaSalad.jpg" alt="Primavera Pesto Pasta Salad" className="dish-image" />
+                        <div className="result-container">
+                            <div className="result-text">
+                                <h3>And the dish chosen for you is:</h3>
+                                <h2>{dishName}</h2>
+                                <p>The pasta dish that suits you is currently available at the Emilia restaurant closest to your geographic location, in order to order this dish <span className="highlight" onClick={this.handleOrderClick}>click here</span></p>
+                            </div>
+                            <div className="result-images">
+                                <img src="/images/emilia.png" alt="Emilia Restaurant" className="restaurant-image" />
+                                <img src="/images/primaveraPestoPastaSalad.jpg" alt="Primavera Pesto Pasta Salad" className="dish-image" />
+                            </div>
                             <button onClick={() => this.setState({ completed: true })}>Finish</button>
                         </div>
                     )

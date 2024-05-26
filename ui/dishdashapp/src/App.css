@@ -42,8 +42,43 @@ button:hover {
   margin: 0;
 }
 
-.dish-image {
+.dish-image,
+.restaurant-image {
   width: 300px;
   height: auto;
   margin-top: 20px;
+}
+
+.highlight {
+  font-weight: bold;
+  text-decoration: underline;
+  cursor: pointer;
+  color: blue;
+}
+
+.highlight:hover {
+  color: darkblue;
+}
+
+.result-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.result-text {
+  margin-bottom: 20px;
+}
+
+.result-images {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.result-images img {
+  max-width: 300px;
+  height: auto;
 }
